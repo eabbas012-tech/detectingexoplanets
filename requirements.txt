@@ -5,6 +5,5 @@ opencv-python-headless
 scikit-learn
 tensorflow
 pandas
-imabalanced-learn
 scipy
 plotly
