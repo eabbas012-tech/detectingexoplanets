@@ -17,7 +17,7 @@ df_train = pd.read_csv('exoTrain.csv')
 df_train['LABEL'] = df_train['LABEL'] - 1
 
 # Load the CNN model
-model = tf.keras.models.load_model('cnn/cnn.keras')
+model = tf.keras.models.load_model('./cnn.keras')
 
 def preprocess_data(df):
     """Apply preprocessing steps to the dataframe."""
