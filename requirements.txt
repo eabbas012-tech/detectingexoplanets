@@ -1,7 +1,6 @@
 streamlit
-joblib
+imbalanced-learn==0.13
 numpy
-opencv-python-headless
 scikit-learn
 tensorflow
 pandas
