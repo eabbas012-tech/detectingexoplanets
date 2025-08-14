@@ -124,20 +124,3 @@ fig_cm_cnn = ff.create_annotated_heatmap(z=cm_cnn, x=['Pred 0', 'Pred 1'], y=['T
                                          colorscale='Viridis', showscale=True)
 fig_cm_cnn.update_layout(title='Confusion Matrix for CNN for Entire Dataset')
 st.plotly_chart(fig_cm_cnn, use_container_width=True)
-################################################################################
-##########=                   YOUR CODE BELOW                  =################
-################################################################################
-show_full_light_curve = st.checkbox("Show Full Light Curve", value=True)
-if show_full_light_curve:
-    fig5 = go.Figure()
-    fig5.add_trace(go.Scatter(y=X_train[index], mode='lines', name='Light Curve'))
-    fig5.add_shape(type="rect",
-                  x0=t_0, y0=min(X_train[index])-5,
-                  x1=t_0+period, y1=max(X_train[index])+5,
-                  line=dict(color="Red"),
-                  fillcolor="LightPink", opacity=0.5)
-    fig5.update_layout(title="Box Covering One Period of Exoplanet Transit",
-                      xaxis_title="Observation Point",
-                      yaxis_title="Normalized Flux",
-                      showlegend=True)
-    st.plotly_chart(fig5, use_container_width=True)
