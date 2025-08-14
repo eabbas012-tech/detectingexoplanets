@@ -29,11 +29,11 @@ def download_with_requests(url, output_path):
         print(f"Error downloading {url}: {e}")
 
 # Example usage:
-download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTrain.csv", "exoTrain.csv")
-download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTest.csv", "exoTest.csv")
 
-@st.cache_data
+@st.cache_resource
 def init_data():
+
+    download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTrain.csv", "exoTrain.csv")
     df_train = pd.read_csv('exoTrain.csv')
     df_train['LABEL'] = df_train['LABEL'] - 1
     return df_train
