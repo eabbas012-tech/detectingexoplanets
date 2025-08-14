@@ -13,6 +13,24 @@ from sklearn.metrics import confusion_matrix
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
 # Load data
+
+import requests
+
+def download_with_requests(url, output_path):
+    try:
+        response = requests.get(url, stream=True)
+        response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+        with open(output_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        print(f"Downloaded {url} successfully to {output_path}.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading {url}: {e}")
+
+# Example usage:
+download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTrain.csv", "exoTrain.csv")
+download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTest.csv", "exoTest.csv")
+
 df_train = pd.read_csv('exoTrain.csv')
 df_train['LABEL'] = df_train['LABEL'] - 1
 
