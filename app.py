@@ -116,7 +116,7 @@ prediction = predict(index)
 st.write(f"Prediction (probability of being an exoplanet): {prediction:.4f}")
 
 # Compute and plot confusion matrix
-cnn_pred_labels = (model.predict(X_train).flatten() > 0.5).astype(int)
+cnn_pred_labels = (model.predict(X_train_cnn).flatten() > 0.5).astype(int)
 cm_cnn = confusion_matrix(y_train, cnn_pred_labels)
 
 # Confusion Matrix for CNN
