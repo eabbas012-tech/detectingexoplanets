@@ -16,6 +16,7 @@ import plotly.graph_objects as go
 
 import requests
 
+@st.cache_resource
 def download_with_requests(url, output_path):
     try:
         response = requests.get(url, stream=True)
@@ -31,12 +32,18 @@ def download_with_requests(url, output_path):
 download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTrain.csv", "exoTrain.csv")
 download_with_requests("https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Planet%20Hunters/exoTest.csv", "exoTest.csv")
 
-df_train = pd.read_csv('exoTrain.csv')
-df_train['LABEL'] = df_train['LABEL'] - 1
+@st.cache_data
+def init_data():
+    df_train = pd.read_csv('exoTrain.csv')
+    df_train['LABEL'] = df_train['LABEL'] - 1
+    return df_train
+
+df_train = init_data()
 
 # Load the CNN model
 model = tf.keras.models.load_model('./cnn.keras')
 
+@st.cache_resource
 def preprocess_data(df):
     """Apply preprocessing steps to the dataframe."""
     X = df.drop('LABEL', axis=1).values
