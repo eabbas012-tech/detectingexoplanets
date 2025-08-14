@@ -129,15 +129,15 @@ st.plotly_chart(fig_cm_cnn, use_container_width=True)
 ################################################################################
 show_full_light_curve = st.checkbox("Show Full Light Curve", value=True)
 if show_full_light_curve:
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(y=X_train[index], mode='lines', name='Light Curve'))
-    fig.add_shape(type="rect",
+    fig5 = go.Figure()
+    fig5.add_trace(go.Scatter(y=X_train[index], mode='lines', name='Light Curve'))
+    fig5.add_shape(type="rect",
                   x0=t_0, y0=min(X_train[index])-5,
                   x1=t_0+period, y1=max(X_train[index])+5,
                   line=dict(color="Red"),
                   fillcolor="LightPink", opacity=0.5)
-    fig.update_layout(title="Box Covering One Period of Exoplanet Transit",
+    fig5.update_layout(title="Box Covering One Period of Exoplanet Transit",
                       xaxis_title="Observation Point",
                       yaxis_title="Normalized Flux",
                       showlegend=True)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig5, use_container_width=True)
